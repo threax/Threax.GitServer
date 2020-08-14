@@ -6,6 +6,8 @@ If you get a login error `Permission denied (publickey,keyboard-interactive).` i
 On Linux these should be fixed, but with a Windows host you will need to modify sshd_config find the line StrictModes and set it
 to `StrictModes no`.
 
+This will appear in the /config folder. Run the image once to create it.
+
 # TortoiseGit
 To get TortoiseGit to use the windows ssh client open the (TortoiseGit) Settings app then Click on Network and change SSH Client to
 ```
