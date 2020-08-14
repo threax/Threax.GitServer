@@ -1,1 +1,1 @@
-docker rm openssh-server --force
+docker rm git-ssh-server --force

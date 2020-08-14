@@ -1,1 +1,1 @@
-docker build . -t threax/openssh-server
+docker build . -t threax/git-ssh-server
