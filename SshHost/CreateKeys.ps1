@@ -1,4 +1,5 @@
 # This should work as an init command, make it ssh-keygen -A
+# It seems like it can run over and over without destroying what is there
 
 docker rm openssh-server --force
 
