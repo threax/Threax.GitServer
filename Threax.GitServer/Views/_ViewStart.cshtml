@@ -1,0 +1,4 @@
+﻿@inject Threax.AspNetCore.Mvc.CacheUi.ICacheUiRenderData renderData;
+@{
+    Layout = renderData.Layout?.ToString() ?? "_Layout";
+}

@@ -1,0 +1,6 @@
+﻿@{
+    Layout = "_LayoutTop";
+}
+<script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Header), typeof(HomeController))"></script>
+<div class="container body-content mt-3">@RenderBody()</div>
+<script type="text/javascript" src="@Url.CacheUiActionLink(nameof(HomeController.Footer), typeof(HomeController))"></script>
