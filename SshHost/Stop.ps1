@@ -1,0 +1,1 @@
+docker rm openssh-server --force

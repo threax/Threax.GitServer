@@ -1,3 +1,5 @@
+# This should work as an init command, make it ssh-keygen -A
+
 docker rm openssh-server --force
 
 docker run `
