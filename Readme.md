@@ -21,6 +21,10 @@ Start with
 /usr/sbin/sshd -D -p 2222
 ```
 
-Will have to run ssh-keygen -A once in the container to create the keys, do a volume mount for this to keep it.
+Will have to run ssh-keygen -A once in the container to create the keys, do a volume mount for this to keep it. (See run.ps1)
 
 sshd_config works, but has lessened security with `StrictModes no` as described above.
+
+Put this into the ssk-keys mount that goes to /etc/ssh
+
+The .ssh folder maps to /home/$USER/.ssh
