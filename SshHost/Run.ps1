@@ -1,7 +1,7 @@
 docker rm openssh-server --force
 
 docker run `
--it `
+-d `
   --name=openssh-server `
   --user 30010:30011 `
   -p 2222:2222 `
