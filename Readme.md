@@ -14,3 +14,13 @@ To get TortoiseGit to use the windows ssh client open the (TortoiseGit) Settings
 C:\Windows\System32\OpenSSH\ssh.exe
 ```
 It should now pick up the key and config from the user ssh folder.
+
+# Ubuntu Server
+Start with 
+```
+/usr/sbin/sshd -D -p 2222
+```
+
+Will have to run ssh-keygen -A once in the container to create the keys, do a volume mount for this to keep it.
+
+sshd_config works, but has lessened security with `StrictModes no` as described above.

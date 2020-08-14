@@ -1,13 +1,13 @@
 docker rm openssh-server --force
 
 docker run `
+-it `
   --name=openssh-server `
-  -e PUID=1000 `
-  -e PGID=1000 `
-  -e TZ=America/New_York `
+  --user 30010:30011 `
   -p 2222:2222 `
   -v ${pwd}/repo:/repo `
-  -v ${pwd}/config:/config `
+  -v ${pwd}/config/ssh-keys:/etc/ssh `
+  -v ${pwd}/config/.ssh:/home/threax/.ssh `
   --rm `
   threax/openssh-server
 
