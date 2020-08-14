@@ -10,4 +10,4 @@ RUN apt-get update &&\
 RUN useradd -u 30010 -ms /bin/bash threax
 USER threax
 
-#ENTRYPOINT [ "/usr/sbin/sshd", "-d" "-p", "2222" ]
+CMD /usr/sbin/sshd -D -p 2222
