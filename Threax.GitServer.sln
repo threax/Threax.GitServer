@@ -5,6 +5,21 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.GitServer", "Threax.GitServer\Threax.GitServer.csproj", "{25AE9192-1832-43EE-9952-CAD7A1891EA5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SshHost", "SshHost", "{B836773B-4B89-400A-B9C7-4E9B5F26C20B}"
+	ProjectSection(SolutionItems) = preProject
+		SshHost\Build.ps1 = SshHost\Build.ps1
+		SshHost\CreateKeys.ps1 = SshHost\CreateKeys.ps1
+		SshHost\Dockerfile = SshHost\Dockerfile
+		SshHost\Run.ps1 = SshHost\Run.ps1
+		SshHost\sshd_config = SshHost\sshd_config
+		SshHost\Stop.ps1 = SshHost\Stop.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BDE8FC9B-74CE-4A68-8EE3-09AE96BA2F74}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

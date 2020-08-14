@@ -18,6 +18,7 @@ It should now pick up the key and config from the user ssh folder.
 # Running First Time
 1. Run Build.ps1
 1. Run CreateKeys.ps1
+1. Copy sshd_config to the config/ssh-keys folder that is created.
 1. Run Run.ps1
 
 # Ubuntu Container Research
