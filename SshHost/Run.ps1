@@ -12,7 +12,6 @@ docker run `
   threax/openssh-server
 
 
-
   #--hostname=openssh-server `#optional` `
   #-e PUBLIC_KEY=yourpublickey `#optional` `
   #-e PUBLIC_KEY_FILE=/path/to/file `#optional` `

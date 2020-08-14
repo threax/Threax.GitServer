@@ -15,7 +15,12 @@ C:\Windows\System32\OpenSSH\ssh.exe
 ```
 It should now pick up the key and config from the user ssh folder.
 
-# Ubuntu Server
+# Running First Time
+1. Run Build.ps1
+1. Run CreateKeys.ps1
+1. Run Run.ps1
+
+# Ubuntu Container Research
 Start with 
 ```
 /usr/sbin/sshd -D -p 2222
