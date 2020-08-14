@@ -1,13 +1,15 @@
+docker rm openssh-server --force
+
 docker run `
   --name=openssh-server `
   -e PUID=1000 `
   -e PGID=1000 `
   -e TZ=America/New_York `
   -p 2222:2222 `
-  -v ${pwd}/appdata:/appdata `
+  -v ${pwd}/repo:/repo `
   -v ${pwd}/config:/config `
   --rm `
-  linuxserver/openssh-server
+  threax/openssh-server
 
 
 
