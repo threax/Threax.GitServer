@@ -16,7 +16,7 @@ namespace Threax.GitServer
         /// <summary>
         /// A default role to edit values, you will probably want to replace this role.
         /// </summary>
-        public const String EditValues = nameof(EditValues);
+        public const String EditGitRepos = nameof(EditGitRepos);
 
         public const String EditAuthorizedKeys = nameof(EditAuthorizedKeys);
 
@@ -26,7 +26,7 @@ namespace Threax.GitServer
         /// <returns></returns>
         public static IEnumerable<String> DatabaseRoles()
         {
-            yield return EditValues;
+            yield return EditGitRepos;
             yield return EditAuthorizedKeys;
         }
     }

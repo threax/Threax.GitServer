@@ -7,7 +7,7 @@ using Threax.AspNetCore.Models;
 
 namespace Threax.GitServer.ModelSchemas
 {
-    [RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
+    [RequireAuthorization(typeof(Roles), nameof(Roles.EditGitRepos))]
     public abstract class Value
     {
         [Required]

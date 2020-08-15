@@ -9,7 +9,7 @@ namespace Threax.GitServer.Controllers
 {
     public partial class HomeController
     {
-        [Authorize(Roles = Roles.EditValues)]
+        [Authorize(Roles = Roles.EditGitRepos)]
         public IActionResult GitRepos()
         {
             return View();

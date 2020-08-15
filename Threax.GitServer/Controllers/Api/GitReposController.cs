@@ -13,7 +13,7 @@ namespace Threax.GitServer.Controllers.Api
 {
     [Route("api/[controller]")]
     [ResponseCache(NoStore = true)]
-    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer, Roles = Roles.EditValues)]
+    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer, Roles = Roles.EditGitRepos)]
     public partial class GitReposController : Controller
     {
         private IGitRepoRepository repo;
