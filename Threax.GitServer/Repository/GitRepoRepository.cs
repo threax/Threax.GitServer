@@ -28,10 +28,10 @@ namespace Threax.GitServer.Repository
 
         public Task<GitRepoCollection> List(GitRepoQuery query)
         {
-            var repos = repoFolderProvider.GetDirectoryInfo().GetDirectories($"*{query.Name}*");
-            var results = repos.Skip(query.SkipTo(repos.Length)).Take(query.Limit).Select(i => GetGitRepoInfo(i));
+            var repos = repoFolderProvider.GetDirectoryInfo().EnumerateDirectories($"*{query.Name}*").OrderByDescending(i => i.LastAccessTime).ToList();
+            var results = repos.Skip(query.SkipTo(repos.Count)).Take(query.Limit).Select(i => GetGitRepoInfo(i));
 
-            return Task.FromResult(new GitRepoCollection(query, repos.Length, results));
+            return Task.FromResult(new GitRepoCollection(query, repos.Count, results));
         }
 
         public Task<GitRepo> Get(String name)
