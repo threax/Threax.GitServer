@@ -10,4 +10,4 @@ RUN apt-get update &&\
 RUN useradd -u 30010 -ms /bin/bash threax
 USER threax
 
-CMD /usr/sbin/sshd -D -p 2222
+CMD /usr/sbin/sshd -D -p 2222 -f /app/config/sshd_config

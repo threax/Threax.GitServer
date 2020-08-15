@@ -7,6 +7,7 @@ docker run `
   -p 2222:2222 `
   -v ${pwd}/repo:/repo `
   -v ${pwd}/config/ssh-keys:/etc/ssh `
+  -v ${pwd}/sshd_config:/app/config/sshd_config `
   -v ${pwd}/config/.ssh:/home/threax/.ssh `
   --rm `
   threax/git-ssh-server
