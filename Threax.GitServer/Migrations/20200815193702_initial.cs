@@ -14,6 +14,7 @@ namespace Threax.GitServer.Migrations
                     AuthorizedKeyId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 450, nullable: false),
                     PublicKey = table.Column<string>(maxLength: 10000, nullable: false),
+                    Enabled = table.Column<bool>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false)
                 },

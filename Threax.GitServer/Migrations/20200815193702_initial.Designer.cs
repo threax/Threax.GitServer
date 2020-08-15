@@ -9,7 +9,7 @@ using Threax.GitServer.Database;
 namespace Threax.GitServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200815192906_initial")]
+    [Migration("20200815193702_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,9 @@ namespace Threax.GitServer.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Modified")
                         .HasColumnType("TEXT");

@@ -70,6 +70,9 @@ namespace Threax.GitServer.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("TEXT");
 
