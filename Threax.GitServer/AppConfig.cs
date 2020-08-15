@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Threax.GitServer
 {
@@ -106,5 +107,10 @@ namespace Threax.GitServer
         /// The path to the authorized_keys file to write.
         /// </summary>
         public string AuthorizedKeysPath { get; set; }
+
+        /// <summary>
+        /// The path to the folder to load key per files keys from. Can be null to not load anything. Default: null
+        /// </summary>
+        public String KeyPerFilePath { get; set; }
     }
 }
