@@ -8,6 +8,9 @@
         "Name": "git-ssh-server",
         "User": 30010,
         "Group": 30010,
+        "Environment": {
+            "StrictModes": "no"
+        },
         "Volumes": {
             "repo": {
                 "Source": "repo",
@@ -16,11 +19,6 @@
             "ssh-keys": {
                 "Source": "ssh-keys",
                 "Destination": "/etc/ssh"
-            },
-            "sshd_config": {
-                "Source": "sshd_config",
-                "Destination": "/app/config/sshd_config",
-                "Type": "File"
             },
             "ssh": {
                 "Source": ".ssh",
