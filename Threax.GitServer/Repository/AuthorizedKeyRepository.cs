@@ -61,6 +61,11 @@ namespace Threax.GitServer.Repository
             throw new KeyNotFoundException($"Cannot find authorizedKey {authorizedKeyId.ToString()}");
         }
 
+        public async Task<IEnumerable<String>> GetAllEnabledPublicKeys()
+        {
+            return await this.Entities.Where(i => i.Enabled).Select(i => i.PublicKey).ToListAsync();
+        }
+
         public async Task Delete(Guid id)
         {
             var entity = await this.Entity(id);

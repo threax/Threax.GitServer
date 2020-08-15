@@ -101,5 +101,10 @@ namespace Threax.GitServer
         /// Set the format string to use for clone paths.
         /// </summary>
         public string ClonePathFormat { get; set; }
+
+        /// <summary>
+        /// The path to the authorized_keys file to write.
+        /// </summary>
+        public string AuthorizedKeysPath { get; set; }
     }
 }

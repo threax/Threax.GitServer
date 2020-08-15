@@ -16,5 +16,6 @@ namespace Threax.GitServer.Repository
         Task<bool> HasAuthorizedKeys();
         Task<AuthorizedKeyCollection> List(AuthorizedKeyQuery query);
         Task<AuthorizedKey> Update(Guid authorizedKeyId, AuthorizedKeyInput value);
+        Task<IEnumerable<String>> GetAllEnabledPublicKeys();
     }
 }

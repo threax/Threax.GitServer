@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Tests;
 using Xunit;
+using Threax.GitServer.Services;
 
 namespace Threax.GitServer.Tests
 {
@@ -17,7 +18,7 @@ namespace Threax.GitServer.Tests
 
             public Controller()
             {
-                mockup.Add<AuthorizedKeysController>(m => new AuthorizedKeysController(m.Get<IAuthorizedKeyRepository>())
+                mockup.Add<AuthorizedKeysController>(m => new AuthorizedKeysController(m.Get<IAuthorizedKeyRepository>(), m.Get<IAuthorizedKeysWriter>())
                 {
                     ControllerContext = m.Get<ControllerContext>()
                 });

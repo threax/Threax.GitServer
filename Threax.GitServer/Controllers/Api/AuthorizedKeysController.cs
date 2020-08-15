@@ -8,6 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 using Threax.GitServer.ViewModels;
 using Threax.GitServer.InputModels;
 using Microsoft.AspNetCore.Authorization;
+using Threax.GitServer.Services;
 
 namespace Threax.GitServer.Controllers.Api
 {
@@ -17,10 +18,12 @@ namespace Threax.GitServer.Controllers.Api
     public partial class AuthorizedKeysController : Controller
     {
         private IAuthorizedKeyRepository repo;
+        private readonly IAuthorizedKeysWriter authorizedKeysWriter;
 
-        public AuthorizedKeysController(IAuthorizedKeyRepository repo)
+        public AuthorizedKeysController(IAuthorizedKeyRepository repo, IAuthorizedKeysWriter authorizedKeysWriter)
         {
             this.repo = repo;
+            this.authorizedKeysWriter = authorizedKeysWriter;
         }
 
         [HttpGet]
@@ -42,7 +45,9 @@ namespace Threax.GitServer.Controllers.Api
         [AutoValidate("Cannot add new authorizedKey")]
         public async Task<AuthorizedKey> Add([FromBody]AuthorizedKeyInput authorizedKey)
         {
-            return await repo.Add(authorizedKey);
+            var results = await repo.Add(authorizedKey);
+            await WriteAuthorizationKeys();
+            return results;
         }
 
         [HttpPut("{AuthorizedKeyId}")]
@@ -50,7 +55,9 @@ namespace Threax.GitServer.Controllers.Api
         [AutoValidate("Cannot update authorizedKey")]
         public async Task<AuthorizedKey> Update(Guid authorizedKeyId, [FromBody]AuthorizedKeyInput authorizedKey)
         {
-            return await repo.Update(authorizedKeyId, authorizedKey);
+            var results = await repo.Update(authorizedKeyId, authorizedKey);
+            await WriteAuthorizationKeys();
+            return results;
         }
 
         [HttpDelete("{AuthorizedKeyId}")]
@@ -58,6 +65,13 @@ namespace Threax.GitServer.Controllers.Api
         public async Task Delete(Guid authorizedKeyId)
         {
             await repo.Delete(authorizedKeyId);
+            await WriteAuthorizationKeys();
+        }
+
+        private async Task WriteAuthorizationKeys()
+        {
+            var activeKeys = await repo.GetAllEnabledPublicKeys();
+            authorizedKeysWriter.WriteAuthorizedKeys(activeKeys);
         }
     }
 }
