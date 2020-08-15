@@ -53,6 +53,7 @@ namespace Threax.GitServer.Repository
             }
 
             Directory.CreateDirectory(fullPath);
+            LibGit2Sharp.Repository.Init(fullPath, true);
 
             var dirInfo = new DirectoryInfo(fullPath);
             return Task.FromResult(GetGitRepoInfo(dirInfo));
