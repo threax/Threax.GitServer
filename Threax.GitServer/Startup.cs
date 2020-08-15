@@ -218,7 +218,7 @@ namespace Threax.GitServer
             services.AddEntryPointRenderer<EntryPointController>(e => e.Get());
             services.AddSingleton<AppConfig>(appConfig);
             services.AddSingleton<IProcessRunner, ProcessRunner>();
-            services.AddSingleton<IRepoFolderProvider, RepoFolderProvider>();
+            services.AddSingleton<IRepoFolderProvider>(s => new RepoFolderProvider(appConfig.RepoBaseDir));
 
             if (appConfig.EnableResponseCompression)
             {

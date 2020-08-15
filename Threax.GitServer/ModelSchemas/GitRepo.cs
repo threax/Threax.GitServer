@@ -8,6 +8,7 @@ namespace Threax.GitServer.ModelSchemas
 {
     [KeyName("Name")]
     [KeyType(typeof(String))]
+    [RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     public class GitRepo
     {
         public String ClonePath { get; set; }
