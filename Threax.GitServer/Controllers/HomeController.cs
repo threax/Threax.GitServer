@@ -18,20 +18,16 @@ namespace Threax.GitServer.Controllers
             
         }
 
-        //You can get rid of this AllowAnonymous to secure the welcome page, you can secure the header and footer if desired too.
-        [AllowAnonymous]
         public Task<IActionResult> Index()
         {
             return CacheUiView();
         }
 
-        [AllowAnonymous]
         public Task<IActionResult> Header()
         {
             return CacheUiView();
         }
 
-        [AllowAnonymous]
         public Task<IActionResult> Footer()
         {
             return CacheUiView();
