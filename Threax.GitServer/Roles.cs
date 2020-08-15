@@ -16,7 +16,9 @@ namespace Threax.GitServer
         /// <summary>
         /// A default role to edit values, you will probably want to replace this role.
         /// </summary>
-        public const String EditValues = "EditValues";
+        public const String EditValues = nameof(EditValues);
+
+        public const String EditAuthorizedKeys = nameof(EditAuthorizedKeys);
 
         /// <summary>
         /// All roles, any roles added above that you want to add to the database should be defined here.
@@ -25,6 +27,7 @@ namespace Threax.GitServer
         public static IEnumerable<String> DatabaseRoles()
         {
             yield return EditValues;
+            yield return EditAuthorizedKeys;
         }
     }
 
@@ -35,10 +38,8 @@ namespace Threax.GitServer
     [HalActionLink(CrudRels.Delete, RolesControllerRels.DeleteUser, typeof(RolesController))]
     public class RoleAssignments : ReflectedRoleAssignments
     {
-        /// <summary>
-        /// Also add a property for any roles you define, this way the ui can offer them for editing.
-        /// </summary>
-        [Display(Name = "Edit Values")]
         public bool EditValues { get; set; }
+
+        public bool EditAuthorizedKeys { get; set; }
     }
 }
