@@ -12,12 +12,7 @@ namespace Threax.GitServer.Services
 
         public RepoFolderProvider(String baseDir)
         {
-            this.baseDir = Path.GetFullPath(baseDir);
-
-            if (!Directory.Exists(this.baseDir))
-            {
-                Directory.CreateDirectory(this.baseDir);
-            }
+            this.baseDir = baseDir;
         }
 
         public String BaseDir => baseDir;

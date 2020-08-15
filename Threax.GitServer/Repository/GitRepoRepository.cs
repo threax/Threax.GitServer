@@ -67,7 +67,8 @@ namespace Threax.GitServer.Repository
 
         public Task<bool> HasGitRepos()
         {
-            return Task.FromResult(repoFolderProvider.GetDirectoryInfo().GetDirectories().Length > 0);
+            var dirInfo = repoFolderProvider.GetDirectoryInfo();
+            return Task.FromResult(dirInfo.Exists && dirInfo.GetDirectories().Length > 0);
         }
 
         public virtual async Task AddRange(IEnumerable<GitRepoInput> gitRepos)

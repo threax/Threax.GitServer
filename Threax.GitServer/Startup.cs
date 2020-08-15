@@ -25,6 +25,7 @@ using Threax.AspNetCore.UserBuilder;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 using Threax.Extensions.Configuration.SchemaBinder;
 using Threax.Sqlite.Ext.EfCore3;
+using Threax.GitServer.Services;
 
 namespace Threax.GitServer
 {
@@ -216,6 +217,8 @@ namespace Threax.GitServer
 
             services.AddEntryPointRenderer<EntryPointController>(e => e.Get());
             services.AddSingleton<AppConfig>(appConfig);
+            services.AddSingleton<IProcessRunner, ProcessRunner>();
+            services.AddSingleton<IRepoFolderProvider, RepoFolderProvider>();
 
             if (appConfig.EnableResponseCompression)
             {
