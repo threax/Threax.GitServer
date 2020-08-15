@@ -14,7 +14,6 @@ class AppMenuInjector extends menu.AppMenuInjector<client.EntryPointResult> {
 
     public * createMenu(entry: client.EntryPointResult): Generator<menu.AppMenuItem> {
         yield { text: "Home", href: "" };
-        yield { text: "Values", href: "Values" };
         yield { text: "GitRepos", href: "GitRepos" };
 
         if (entry.canListUsers()) {

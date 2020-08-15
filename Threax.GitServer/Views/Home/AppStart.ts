@@ -18,7 +18,7 @@ class AppStart {
         //Check for login
         const entry = await this.entry.load();
         let loginResult: boolean = true;
-        if (!entry.canListValues()) {
+        if (!entry.canListGitRepos()) {
             loginResult = await this.login.showLogin();
         }
 
