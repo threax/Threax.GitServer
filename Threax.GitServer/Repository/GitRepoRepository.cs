@@ -10,33 +10,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using System.IO;
 
 namespace Threax.GitServer.Repository
 {
     public partial class GitRepoRepository : IGitRepoRepository
     {
-        private AppDbContext dbContext;
-        private AppMapper mapper;
+        private readonly AppDbContext dbContext;
+        private readonly AppMapper mapper;
+        private readonly DirectoryInfo repoDir;
 
-        public GitRepoRepository(AppDbContext dbContext, AppMapper mapper)
+        public GitRepoRepository(AppDbContext dbContext, AppMapper mapper, AppConfig appConfig)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.repoDir = new DirectoryInfo(Path.GetFullPath(appConfig.RepoBaseDir));
+            if (!repoDir.Exists)
+            {
+                throw new DirectoryNotFoundException($"Cannot find repository directory '{repoDir}'.");
+            }
         }
 
-        public async Task<GitRepoCollection> List(GitRepoQuery query)
+        public Task<GitRepoCollection> List(GitRepoQuery query)
         {
-            var dbQuery = await query.Create(this.Entities);
+            //var dbQuery = await query.Create(this.Entities);
 
-            var total = await dbQuery.CountAsync();
-            dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
-            var results = await mapper.ProjectGitRepo(dbQuery).ToListAsync();
+            //var total = await dbQuery.CountAsync();
+            //dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
+            //var results = await mapper.ProjectGitRepo(dbQuery).ToListAsync();
+            var repos = repoDir.GetDirectories($"*{query.Name}*");
+            var results = repos.Skip(query.SkipTo(repos.Length)).Take(query.Limit)
+                .Select(i => new GitRepo()
+                {
+                    Name = i.Name,
+                    Created = i.CreationTime,
+                    Modified = i.LastWriteTime
+                });
 
-            return new GitRepoCollection(query, total, results);
+            return Task.FromResult(new GitRepoCollection(query, repos.Length, results));
         }
 
         public async Task<GitRepo> Get(Guid gitRepoId)
         {
+            var 
             var entity = await this.Entity(gitRepoId);
             return mapper.MapGitRepo(entity, new GitRepo());
         }

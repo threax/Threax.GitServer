@@ -21,6 +21,11 @@ namespace Threax.GitServer.InputModels
         public Guid? GitRepoId { get; set; }
 
         /// <summary>
+        /// Query by name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// Populate an IQueryable. Does not apply the skip or limit.
         /// </summary>
         /// <param name="query">The query to populate.</param>

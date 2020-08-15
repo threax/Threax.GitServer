@@ -13,6 +13,11 @@ namespace Threax.GitServer
         public string BaseUrl { get; set; } = HalcyonConventionOptions.HostVariable;
 
         /// <summary>
+        /// The base directory for the repositories.
+        /// </summary>
+        public string RepoBaseDir { get; set; }
+
+        /// <summary>
         /// The connection string for the app's primary database.
         /// </summary>
         public string ConnectionString { get; set; }
