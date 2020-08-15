@@ -8,6 +8,21 @@ namespace Threax.GitServer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AuthorizedKeys",
+                columns: table => new
+                {
+                    AuthorizedKeyId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(maxLength: 450, nullable: false),
+                    PublicKey = table.Column<string>(maxLength: 10000, nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AuthorizedKeys", x => x.AuthorizedKeyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "spc.auth.Roles",
                 columns: table => new
                 {
@@ -29,20 +44,6 @@ namespace Threax.GitServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_spc.auth.Users", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Values",
-                columns: table => new
-                {
-                    ValueId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 450, nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Values", x => x.ValueId);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,10 +79,10 @@ namespace Threax.GitServer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "spc.auth.UsersToRoles");
+                name: "AuthorizedKeys");
 
             migrationBuilder.DropTable(
-                name: "Values");
+                name: "spc.auth.UsersToRoles");
 
             migrationBuilder.DropTable(
                 name: "spc.auth.Roles");
