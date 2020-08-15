@@ -16,7 +16,7 @@ namespace Threax.GitServer.Tests
     {
         private static Mockup SetupModel(this Mockup mockup)
         {
-            mockup.Add<IGitRepoRepository>(m => new GitRepoRepository(m.Get<IRepoFolderProvider>()));
+            mockup.Add<IGitRepoRepository>(m => new GitRepoRepository(m.Get<IRepoFolderProvider>(), m.Get<IClonePathBuilder>()));
 
             return mockup;
         }

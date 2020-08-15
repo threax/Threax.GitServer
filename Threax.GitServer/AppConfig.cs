@@ -96,5 +96,10 @@ namespace Threax.GitServer
         /// Set this to true to add user secrets. Good for development. Default: false
         /// </summary>
         public bool AddUserSecrets { get; set; }
+
+        /// <summary>
+        /// Set the format string to use for clone paths.
+        /// </summary>
+        public string ClonePathFormat { get; set; }
     }
 }

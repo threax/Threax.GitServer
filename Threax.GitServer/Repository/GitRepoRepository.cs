@@ -18,10 +18,12 @@ namespace Threax.GitServer.Repository
     public partial class GitRepoRepository : IGitRepoRepository
     {
         private readonly IRepoFolderProvider repoFolderProvider;
+        private readonly IClonePathBuilder clonePathBuilder;
 
-        public GitRepoRepository(IRepoFolderProvider repoFolderProvider)
+        public GitRepoRepository(IRepoFolderProvider repoFolderProvider, IClonePathBuilder clonePathBuilder)
         {
             this.repoFolderProvider = repoFolderProvider;
+            this.clonePathBuilder = clonePathBuilder;
         }
 
         public Task<GitRepoCollection> List(GitRepoQuery query)
@@ -92,13 +94,14 @@ namespace Threax.GitServer.Repository
             return dir;
         }
 
-        private static GitRepo GetGitRepoInfo(DirectoryInfo dirInfo)
+        private GitRepo GetGitRepoInfo(DirectoryInfo dirInfo)
         {
             return new GitRepo()
             {
                 Name = dirInfo.Name,
                 Created = dirInfo.CreationTime,
-                Modified = dirInfo.LastWriteTime
+                Modified = dirInfo.LastWriteTime,
+                ClonePath = this.clonePathBuilder.GetCloneUrl(dirInfo.Name)
             };
         }
     }

@@ -219,6 +219,7 @@ namespace Threax.GitServer
             services.AddSingleton<AppConfig>(appConfig);
             services.AddSingleton<IProcessRunner, ProcessRunner>();
             services.AddSingleton<IRepoFolderProvider>(s => new RepoFolderProvider(appConfig.RepoBaseDir));
+            services.AddSingleton<IClonePathBuilder>(s => new ClonePathBuilder(appConfig.ClonePathFormat));
 
             if (appConfig.EnableResponseCompression)
             {
