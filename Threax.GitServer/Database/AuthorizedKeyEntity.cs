@@ -23,6 +23,8 @@ namespace Threax.GitServer.Database
         [MaxLength(10000, ErrorMessage = "Public Key must be less than 10000 characters.")]
         public String PublicKey { get; set; }
 
+        public bool Enabled { get; set; }
+
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }

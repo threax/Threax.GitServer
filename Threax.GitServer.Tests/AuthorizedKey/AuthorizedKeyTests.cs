@@ -20,32 +20,35 @@ namespace Threax.GitServer.Tests
             return mockup;
         }
 
-        public static AuthorizedKeyInput CreateInput(String seed = "", String Name = default(String), String PublicKey = default(String))
+        public static AuthorizedKeyInput CreateInput(String seed = "", String Name = default(String), String PublicKey = default(String), bool Enabled = default(bool))
         {
             return new AuthorizedKeyInput()
             {
                 Name = Name != null ? Name : $"Name {seed}",
                 PublicKey = PublicKey != null ? PublicKey : $"PublicKey {seed}",
+                Enabled = Enabled,
             };
         }
 
-        public static AuthorizedKeyEntity CreateEntity(String seed = "", Guid? AuthorizedKeyId = default(Guid?), String Name = default(String), String PublicKey = default(String))
+        public static AuthorizedKeyEntity CreateEntity(String seed = "", Guid? AuthorizedKeyId = default(Guid?), String Name = default(String), String PublicKey = default(String), bool Enabled = default(bool))
         {
             return new AuthorizedKeyEntity()
             {
                 AuthorizedKeyId = AuthorizedKeyId.HasValue ? AuthorizedKeyId.Value : Guid.NewGuid(),
                 Name = Name != null ? Name : $"Name {seed}",
                 PublicKey = PublicKey != null ? PublicKey : $"PublicKey {seed}",
+                Enabled = Enabled,
             };
         }
 
-        public static AuthorizedKey CreateView(String seed = "", Guid? AuthorizedKeyId = default(Guid?), String Name = default(String), String PublicKey = default(String))
+        public static AuthorizedKey CreateView(String seed = "", Guid? AuthorizedKeyId = default(Guid?), String Name = default(String), String PublicKey = default(String), bool Enabled = default(bool))
         {
             return new AuthorizedKey()
             {
                 AuthorizedKeyId = AuthorizedKeyId.HasValue ? AuthorizedKeyId.Value : Guid.NewGuid(),
                 Name = Name != null ? Name : $"Name {seed}",
                 PublicKey = PublicKey != null ? PublicKey : $"PublicKey {seed}",
+                Enabled = Enabled,
             };
         }
 
@@ -53,12 +56,14 @@ namespace Threax.GitServer.Tests
         {
            Assert.Equal(expected.Name, actual.Name);
            Assert.Equal(expected.PublicKey, actual.PublicKey);
+           Assert.Equal(expected.Enabled, actual.Enabled);
         }
 
         public static void AssertEqual(AuthorizedKeyEntity expected, AuthorizedKey actual)
         {
            Assert.Equal(expected.Name, actual.Name);
            Assert.Equal(expected.PublicKey, actual.PublicKey);
+           Assert.Equal(expected.Enabled, actual.Enabled);
         }
 
     }

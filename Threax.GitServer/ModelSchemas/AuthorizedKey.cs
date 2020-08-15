@@ -17,5 +17,7 @@ namespace Threax.GitServer.ModelSchemas
         [Required]
         [MaxLength(10000)]
         public String PublicKey { get; set; }
+
+        public bool Enabled { get; set; }
     }
 }

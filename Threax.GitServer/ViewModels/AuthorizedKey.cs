@@ -24,6 +24,8 @@ namespace Threax.GitServer.ViewModels
 
         public String PublicKey { get; set; }
 
+        public bool Enabled { get; set; }
+
         [UiOrder(0, 2147483646)]
         public DateTime Created { get; set; }
 

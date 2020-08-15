@@ -1428,6 +1428,7 @@ export interface AuthorizedKey {
     authorizedKeyId?: string;
     name?: string;
     publicKey?: string;
+    enabled?: boolean;
     created?: string;
     modified?: string;
 }
@@ -1435,6 +1436,7 @@ export interface AuthorizedKey {
 export interface AuthorizedKeyInput {
     name?: string;
     publicKey?: string;
+    enabled?: boolean;
 }
 
 export interface AuthorizedKeyCollection {
