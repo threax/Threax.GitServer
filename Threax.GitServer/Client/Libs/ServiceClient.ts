@@ -284,6 +284,60 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("ListAppUsers");
     }
 
+    public listGitRepos(data: GitRepoQuery): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLinkWithData("ListGitRepos", data)
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canListGitRepos(): boolean {
+        return this.client.HasLink("ListGitRepos");
+    }
+
+    public linkForListGitRepos(): hal.HalLink {
+        return this.client.GetLink("ListGitRepos");
+    }
+
+    public getListGitReposDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListGitRepos", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListGitReposDocs(): boolean {
+        return this.client.HasLinkDoc("ListGitRepos");
+    }
+
+    public addGitRepo(data: GitRepoInput): Promise<GitRepoResult> {
+        return this.client.LoadLinkWithData("AddGitRepo", data)
+               .then(r => {
+                    return new GitRepoResult(r);
+                });
+
+    }
+
+    public canAddGitRepo(): boolean {
+        return this.client.HasLink("AddGitRepo");
+    }
+
+    public linkForAddGitRepo(): hal.HalLink {
+        return this.client.GetLink("AddGitRepo");
+    }
+
+    public getAddGitRepoDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("AddGitRepo", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddGitRepoDocs(): boolean {
+        return this.client.HasLinkDoc("AddGitRepo");
+    }
+
     public listValues(data: ValueQuery): Promise<ValueCollectionResult> {
         return this.client.LoadLinkWithData("ListValues", data)
                .then(r => {
@@ -336,6 +390,308 @@ export class EntryPointResult {
 
     public hasAddValueDocs(): boolean {
         return this.client.HasLinkDoc("AddValue");
+    }
+}
+
+export class GitRepoResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: GitRepo = undefined;
+    public get data(): GitRepo {
+        this.strongData = this.strongData || this.client.GetData<GitRepo>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<GitRepoResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new GitRepoResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public update(data: GitRepoInput): Promise<GitRepoResult> {
+        return this.client.LoadLinkWithData("Update", data)
+               .then(r => {
+                    return new GitRepoResult(r);
+                });
+
+    }
+
+    public canUpdate(): boolean {
+        return this.client.HasLink("Update");
+    }
+
+    public linkForUpdate(): hal.HalLink {
+        return this.client.GetLink("Update");
+    }
+
+    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public delete(): Promise<void> {
+        return this.client.LoadLink("Delete").then(hal.makeVoid);
+    }
+
+    public canDelete(): boolean {
+        return this.client.HasLink("Delete");
+    }
+
+    public linkForDelete(): hal.HalLink {
+        return this.client.GetLink("Delete");
+    }
+}
+
+export class GitRepoCollectionResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: GitRepoCollection = undefined;
+    public get data(): GitRepoCollection {
+        this.strongData = this.strongData || this.client.GetData<GitRepoCollection>();
+        return this.strongData;
+    }
+
+    private itemsStrong: GitRepoResult[];
+    public get items(): GitRepoResult[] {
+        if (this.itemsStrong === undefined) {
+            var embeds = this.client.GetEmbed("values");
+            var clients = embeds.GetAllClients();
+            this.itemsStrong = [];
+            for (var i = 0; i < clients.length; ++i) {
+                this.itemsStrong.push(new GitRepoResult(clients[i]));
+            }
+        }
+        return this.itemsStrong;
+    }
+
+    public refresh(): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public getGetDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Get", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetDocs(): boolean {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public getListDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("List", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListDocs(): boolean {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public add(data: GitRepoInput): Promise<GitRepoResult> {
+        return this.client.LoadLinkWithData("Add", data)
+               .then(r => {
+                    return new GitRepoResult(r);
+                });
+
+    }
+
+    public canAdd(): boolean {
+        return this.client.HasLink("Add");
+    }
+
+    public linkForAdd(): hal.HalLink {
+        return this.client.GetLink("Add");
+    }
+
+    public getAddDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Add", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddDocs(): boolean {
+        return this.client.HasLinkDoc("Add");
+    }
+
+    public next(): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLink("next")
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+    public linkForNext(): hal.HalLink {
+        return this.client.GetLink("next");
+    }
+
+    public getNextDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("next", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasNextDocs(): boolean {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public previous(): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLink("previous")
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+    public linkForPrevious(): hal.HalLink {
+        return this.client.GetLink("previous");
+    }
+
+    public getPreviousDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("previous", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasPreviousDocs(): boolean {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public first(): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLink("first")
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+    public linkForFirst(): hal.HalLink {
+        return this.client.GetLink("first");
+    }
+
+    public getFirstDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("first", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasFirstDocs(): boolean {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public last(): Promise<GitRepoCollectionResult> {
+        return this.client.LoadLink("last")
+               .then(r => {
+                    return new GitRepoCollectionResult(r);
+                });
+
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
+
+    public linkForLast(): hal.HalLink {
+        return this.client.GetLink("last");
+    }
+
+    public getLastDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("last", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasLastDocs(): boolean {
+        return this.client.HasLinkDoc("last");
     }
 }
 
@@ -1141,6 +1497,34 @@ export interface UserSearchCollection {
     total?: number;
     offset?: number;
     limit?: number;
+}
+
+export interface GitRepoQuery {
+    /** Lookup a gitRepo by id. */
+    gitRepoId?: string;
+    offset?: number;
+    limit?: number;
+}
+
+export interface GitRepoCollection {
+    offset?: number;
+    /** Lookup a gitRepo by id. */
+    gitRepoId?: string;
+    total?: number;
+    limit?: number;
+}
+
+export interface GitRepoInput {
+    name?: string;
+    clonePath?: string;
+}
+
+export interface GitRepo {
+    gitRepoId?: string;
+    name?: string;
+    clonePath?: string;
+    created?: string;
+    modified?: string;
 }
 
 export interface ValueQuery {
