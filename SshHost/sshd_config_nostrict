@@ -4,5 +4,5 @@ AllowTcpForwarding no
 GatewayPorts no
 X11Forwarding no
 
-# Go ahead and force this to yes
-StrictModes yes
+# This is only needed on Windows hosts, since permissions will be messed up for the volume mount
+StrictModes no
