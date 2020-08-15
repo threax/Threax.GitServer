@@ -9,7 +9,7 @@
         "User": 30010,
         "Group": 30010,
         "Environment": {
-            "StrictModes": "no"
+            "StrictModes": "yes"
         },
         "Volumes": {
             "repo": {
