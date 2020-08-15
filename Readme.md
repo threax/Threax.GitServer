@@ -16,10 +16,13 @@ C:\Windows\System32\OpenSSH\ssh.exe
 It should now pick up the key and config from the user ssh folder.
 
 # Running First Time
-1. Run Build.ps1
-1. Run CreateKeys.ps1
-1. Copy sshd_config to the config/ssh-keys folder that is created.
-1. Run Run.ps1
+1. Go to SshHost
+1. Use Threax.DockerTools to build appconfig.json
+1. Copy sshd_config to data/sshd_config. That is the file name in the data folder. This is a file mount.
+1. Use Threax.DockerTools to run appconfig.json
+1. Run Threax.GitServer
+1. Add your public ssh key to the Authorized Keys gui.
+1. You should now be able to create/clone/push etc to your repos.
 
 # Ubuntu Container Research
 Start with 

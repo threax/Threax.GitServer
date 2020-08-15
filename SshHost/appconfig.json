@@ -1,0 +1,36 @@
+{
+    "Build": {
+        "ImageName": "threax/git-ssh-server",
+        "Dockerfile": "Dockerfile",
+        "PullAllImages": true
+    },
+    "Deploy": {
+        "Name": "git-ssh-server",
+        "User": 30010,
+        "Group": 30010,
+        "Volumes": {
+            "repo": {
+                "Source": "repo",
+                "Destination": "/repo"
+            },
+            "ssh-keys": {
+                "Source": "ssh-keys",
+                "Destination": "/etc/ssh"
+            },
+            "sshd_config": {
+                "Source": "sshd_config",
+                "Destination": "/app/config/sshd_config",
+                "Type": "File"
+            },
+            "ssh": {
+                "Source": ".ssh",
+                "Destination": "/home/threax/.ssh"
+            }
+        },
+        "InitCommand": "ssh-keygen -A",
+        "AutoMountAppSettings": false,
+        "Ports": [
+            "2222:2222"
+        ]
+    }
+}
