@@ -38,15 +38,5 @@ namespace Threax.GitServer.Tests
             };
         }
 
-        public static void AssertEqual(GitRepoInput expected, GitRepoEntity actual)
-        {
-           Assert.Equal(expected.Name, actual.Name);
-        }
-
-        public static void AssertEqual(GitRepoEntity expected, GitRepo actual)
-        {
-           Assert.Equal(expected.ClonePath, actual.ClonePath);
-        }
-
     }
 }

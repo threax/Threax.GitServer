@@ -19,24 +19,5 @@ namespace Threax.GitServer.InputModels
         /// Lookup a gitRepo by id.
         /// </summary>
         public String Name { get; set; }
-
-        /// <summary>
-        /// Populate an IQueryable. Does not apply the skip or limit.
-        /// </summary>
-        /// <param name="query">The query to populate.</param>
-        /// <returns>The query passed in populated with additional conditions.</returns>
-        public Task<IQueryable<GitRepoEntity>> Create(IQueryable<GitRepoEntity> query)
-        {
-            if (Name != null)
-            {
-                query = query.Where(i => i.Name == Name);
-            }
-            else
-            {
-                //Customize query further
-            }
-
-            return Task.FromResult(query);
-        }
     }
 }
