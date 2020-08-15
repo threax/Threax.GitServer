@@ -108,6 +108,308 @@ export class RoleAssignmentsResult {
     }
 }
 
+export class AuthorizedKeyResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: AuthorizedKey = undefined;
+    public get data(): AuthorizedKey {
+        this.strongData = this.strongData || this.client.GetData<AuthorizedKey>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<AuthorizedKeyResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new AuthorizedKeyResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public update(data: AuthorizedKeyInput): Promise<AuthorizedKeyResult> {
+        return this.client.LoadLinkWithData("Update", data)
+               .then(r => {
+                    return new AuthorizedKeyResult(r);
+                });
+
+    }
+
+    public canUpdate(): boolean {
+        return this.client.HasLink("Update");
+    }
+
+    public linkForUpdate(): hal.HalLink {
+        return this.client.GetLink("Update");
+    }
+
+    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public delete(): Promise<void> {
+        return this.client.LoadLink("Delete").then(hal.makeVoid);
+    }
+
+    public canDelete(): boolean {
+        return this.client.HasLink("Delete");
+    }
+
+    public linkForDelete(): hal.HalLink {
+        return this.client.GetLink("Delete");
+    }
+}
+
+export class AuthorizedKeyCollectionResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: AuthorizedKeyCollection = undefined;
+    public get data(): AuthorizedKeyCollection {
+        this.strongData = this.strongData || this.client.GetData<AuthorizedKeyCollection>();
+        return this.strongData;
+    }
+
+    private itemsStrong: AuthorizedKeyResult[];
+    public get items(): AuthorizedKeyResult[] {
+        if (this.itemsStrong === undefined) {
+            var embeds = this.client.GetEmbed("values");
+            var clients = embeds.GetAllClients();
+            this.itemsStrong = [];
+            for (var i = 0; i < clients.length; ++i) {
+                this.itemsStrong.push(new AuthorizedKeyResult(clients[i]));
+            }
+        }
+        return this.itemsStrong;
+    }
+
+    public refresh(): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public getGetDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Get", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetDocs(): boolean {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public getListDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("List", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListDocs(): boolean {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public add(data: AuthorizedKeyInput): Promise<AuthorizedKeyResult> {
+        return this.client.LoadLinkWithData("Add", data)
+               .then(r => {
+                    return new AuthorizedKeyResult(r);
+                });
+
+    }
+
+    public canAdd(): boolean {
+        return this.client.HasLink("Add");
+    }
+
+    public linkForAdd(): hal.HalLink {
+        return this.client.GetLink("Add");
+    }
+
+    public getAddDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Add", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddDocs(): boolean {
+        return this.client.HasLinkDoc("Add");
+    }
+
+    public next(): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLink("next")
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+    public linkForNext(): hal.HalLink {
+        return this.client.GetLink("next");
+    }
+
+    public getNextDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("next", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasNextDocs(): boolean {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public previous(): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLink("previous")
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+    public linkForPrevious(): hal.HalLink {
+        return this.client.GetLink("previous");
+    }
+
+    public getPreviousDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("previous", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasPreviousDocs(): boolean {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public first(): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLink("first")
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+    public linkForFirst(): hal.HalLink {
+        return this.client.GetLink("first");
+    }
+
+    public getFirstDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("first", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasFirstDocs(): boolean {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public last(): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLink("last")
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
+
+    public linkForLast(): hal.HalLink {
+        return this.client.GetLink("last");
+    }
+
+    public getLastDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("last", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasLastDocs(): boolean {
+        return this.client.HasLinkDoc("last");
+    }
+}
+
 export class EntryPointInjector {
     private instancePromise: Promise<EntryPointResult>;
 
@@ -147,6 +449,60 @@ export class EntryPointResult {
     public get data(): EntryPoint {
         this.strongData = this.strongData || this.client.GetData<EntryPoint>();
         return this.strongData;
+    }
+
+    public listAuthorizedKeys(data: AuthorizedKeyQuery): Promise<AuthorizedKeyCollectionResult> {
+        return this.client.LoadLinkWithData("ListAuthorizedKeys", data)
+               .then(r => {
+                    return new AuthorizedKeyCollectionResult(r);
+                });
+
+    }
+
+    public canListAuthorizedKeys(): boolean {
+        return this.client.HasLink("ListAuthorizedKeys");
+    }
+
+    public linkForListAuthorizedKeys(): hal.HalLink {
+        return this.client.GetLink("ListAuthorizedKeys");
+    }
+
+    public getListAuthorizedKeysDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListAuthorizedKeys", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListAuthorizedKeysDocs(): boolean {
+        return this.client.HasLinkDoc("ListAuthorizedKeys");
+    }
+
+    public addAuthorizedKey(data: AuthorizedKeyInput): Promise<AuthorizedKeyResult> {
+        return this.client.LoadLinkWithData("AddAuthorizedKey", data)
+               .then(r => {
+                    return new AuthorizedKeyResult(r);
+                });
+
+    }
+
+    public canAddAuthorizedKey(): boolean {
+        return this.client.HasLink("AddAuthorizedKey");
+    }
+
+    public linkForAddAuthorizedKey(): hal.HalLink {
+        return this.client.GetLink("AddAuthorizedKey");
+    }
+
+    public getAddAuthorizedKeyDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("AddAuthorizedKey", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddAuthorizedKeyDocs(): boolean {
+        return this.client.HasLinkDoc("AddAuthorizedKey");
     }
 
     public refresh(): Promise<EntryPointResult> {
@@ -1066,6 +1422,34 @@ export interface RoleAssignments {
     name?: string;
     editRoles?: boolean;
     superAdmin?: boolean;
+}
+
+export interface AuthorizedKey {
+    authorizedKeyId?: string;
+    name?: string;
+    publicKey?: string;
+    created?: string;
+    modified?: string;
+}
+
+export interface AuthorizedKeyInput {
+    name?: string;
+    publicKey?: string;
+}
+
+export interface AuthorizedKeyCollection {
+    offset?: number;
+    /** Lookup a authorizedKey by id. */
+    authorizedKeyId?: string;
+    total?: number;
+    limit?: number;
+}
+
+export interface AuthorizedKeyQuery {
+    /** Lookup a authorizedKey by id. */
+    authorizedKeyId?: string;
+    offset?: number;
+    limit?: number;
 }
 
 export interface EntryPoint {
