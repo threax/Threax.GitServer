@@ -168,7 +168,6 @@ namespace Threax.GitServer
                 .AddTool("migrate", new ToolCommand("Migrate database to newest version. Run anytime new migrations have been added.", async a =>
                 {
                     await a.Migrate();
-                    a.Scope.ServiceProvider.GetRequiredService<AppDbContext>().ConvertToEfCore3();
                 }))
                 .AddTool("seed", new ToolCommand("Seed database data. Only needed for an empty database.", async a =>
                 {
@@ -178,6 +177,18 @@ namespace Threax.GitServer
                 {
                     await a.AddAdmin();
                 }));
+
+#if DEBUG
+                runner.AddTool("updateConfigSchema", new ToolCommand("Update the schema file for this application's configuration.", async a =>
+                {
+                    var json = await Configuration.CreateSchema();
+                    await File.WriteAllTextAsync("appsettings.schema.json", json);
+                }))
+                .AddTool("createModel", new ToolCommand("Create a model from a model schema using Threax.ModelGen.", a => Threax.ModelGen.ModelGenerator.RunGenerate(a.Args[0])))
+                .AddTool("deleteModel", new ToolCommand("Delete a model from a model schema using Threax.ModelGen.", a => Threax.ModelGen.ModelGenerator.RunDelete(a.Args[0])))
+                .UseClientGenTools();
+#endif
+
                 return runner;
             });
 
