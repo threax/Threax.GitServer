@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 using System.IO;
 using Threax.GitServer.Services;
+using System.Diagnostics;
 
 namespace Threax.GitServer.Repository
 {
@@ -19,11 +20,13 @@ namespace Threax.GitServer.Repository
     {
         private readonly IRepoFolderProvider repoFolderProvider;
         private readonly IClonePathBuilder clonePathBuilder;
+        private readonly IProcessRunner processRunner;
 
-        public GitRepoRepository(IRepoFolderProvider repoFolderProvider, IClonePathBuilder clonePathBuilder)
+        public GitRepoRepository(IRepoFolderProvider repoFolderProvider, IClonePathBuilder clonePathBuilder, IProcessRunner processRunner)
         {
             this.repoFolderProvider = repoFolderProvider;
             this.clonePathBuilder = clonePathBuilder;
+            this.processRunner = processRunner;
         }
 
         public Task<GitRepoCollection> List(GitRepoQuery query)
@@ -51,11 +54,17 @@ namespace Threax.GitServer.Repository
             string fullPath = GetRepoPath(gitRepo.Name);
             if (Directory.Exists(fullPath))
             {
-                throw new InvalidOperationException($"A repository named '{gitRepo}' already exists.");
+                throw new InvalidOperationException($"A repository named '{gitRepo.Name}' already exists.");
             }
 
             Directory.CreateDirectory(fullPath);
-            LibGit2Sharp.Repository.Init(fullPath, true);
+            var startInfo = new ProcessStartInfo("git", "init --bare");
+            startInfo.WorkingDirectory = fullPath;
+            var result = processRunner.RunProcessWithOutput(startInfo);
+            if(result != 0)
+            {
+                throw new InvalidOperationException($"Error initializing git repository '{gitRepo.Name}'.");
+            }
 
             var dirInfo = new DirectoryInfo(fullPath);
             return Task.FromResult(GetGitRepoInfo(dirInfo));

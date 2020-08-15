@@ -12,3 +12,5 @@ To get TortoiseGit to use the windows ssh client open the (TortoiseGit) Settings
 C:\Windows\System32\OpenSSH\ssh.exe
 ```
 It should now pick up the key and config from the user ssh folder.
+
+You may also have to ssh into the host once or otherwise get it into known_hosts for Tortoise to start working correctly.

@@ -17,6 +17,13 @@ RUN --mount=type=cache,target=/root/.nuget/packages,id=threax-build-dotnet-310-n
 
 FROM base AS final
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# Install git
+RUN apt-get update &&\
+    apt-get install git -y &&\
+    apt-get autoremove &&\
+    apt-get clean
+
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Threax.GitServer.dll"]
