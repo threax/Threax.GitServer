@@ -42,7 +42,7 @@ namespace Threax.GitServer.Mappers
 
         void MapInputToEntity(IMappingExpression<GitRepoInput, GitRepoEntity> mapExpr)
         {
-            mapExpr.ForMember(d => d.GitRepoId, opt => opt.Ignore())
+            mapExpr.ForMember(d => d.Name, opt => opt.Ignore())
                 .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
                 .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }

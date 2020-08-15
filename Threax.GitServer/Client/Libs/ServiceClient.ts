@@ -433,33 +433,6 @@ export class GitRepoResult {
         return this.client.HasLinkDoc("self");
     }
 
-    public update(data: GitRepoInput): Promise<GitRepoResult> {
-        return this.client.LoadLinkWithData("Update", data)
-               .then(r => {
-                    return new GitRepoResult(r);
-                });
-
-    }
-
-    public canUpdate(): boolean {
-        return this.client.HasLink("Update");
-    }
-
-    public linkForUpdate(): hal.HalLink {
-        return this.client.GetLink("Update");
-    }
-
-    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update", query)
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
-    }
-
     public delete(): Promise<void> {
         return this.client.LoadLink("Delete").then(hal.makeVoid);
     }
@@ -546,17 +519,6 @@ export class GitRepoCollectionResult {
 
     public hasListDocs(): boolean {
         return this.client.HasLinkDoc("List");
-    }
-
-    public getUpdateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update", query)
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
     }
 
     public add(data: GitRepoInput): Promise<GitRepoResult> {
@@ -1501,7 +1463,7 @@ export interface UserSearchCollection {
 
 export interface GitRepoQuery {
     /** Lookup a gitRepo by id. */
-    gitRepoId?: string;
+    name?: string;
     offset?: number;
     limit?: number;
 }
@@ -1509,18 +1471,16 @@ export interface GitRepoQuery {
 export interface GitRepoCollection {
     offset?: number;
     /** Lookup a gitRepo by id. */
-    gitRepoId?: string;
+    name?: string;
     total?: number;
     limit?: number;
 }
 
 export interface GitRepoInput {
     name?: string;
-    clonePath?: string;
 }
 
 export interface GitRepo {
-    gitRepoId?: string;
     name?: string;
     clonePath?: string;
     created?: string;

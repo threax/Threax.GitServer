@@ -15,7 +15,5 @@ namespace Threax.GitServer.InputModels
     {
         public String Name { get; set; }
 
-        public String ClonePath { get; set; }
-
     }
 }

@@ -12,12 +12,12 @@ export class GitRepoCrudInjector extends hyperCrud.AbstractHypermediaPageInjecto
     }
 
     async list(query: any): Promise<hyperCrud.HypermediaCrudCollection> {
-        var entry = await this.injector.load();
+        const entry = await this.injector.load();
         return entry.listGitRepos(query);
     }
 
     async canList(): Promise<boolean> {
-        var entry = await this.injector.load();
+        const entry = await this.injector.load();
         return entry.canListGitRepos();
     }
 
@@ -26,12 +26,12 @@ export class GitRepoCrudInjector extends hyperCrud.AbstractHypermediaPageInjecto
     }
 
     public getItemId(item: client.GitRepoResult): string | null {
-        return String(item.data.gitRepoId);
+        return String(item.data.name);
     }
 
     public createIdQuery(id: string): client.GitRepoQuery | null {
         return {
-            gitRepoId: id
+            name: id
         };
     }
 }

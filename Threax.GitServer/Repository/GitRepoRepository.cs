@@ -39,82 +39,70 @@ namespace Threax.GitServer.Repository
             //dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
             //var results = await mapper.ProjectGitRepo(dbQuery).ToListAsync();
             var repos = repoDir.GetDirectories($"*{query.Name}*");
-            var results = repos.Skip(query.SkipTo(repos.Length)).Take(query.Limit)
-                .Select(i => new GitRepo()
-                {
-                    Name = i.Name,
-                    Created = i.CreationTime,
-                    Modified = i.LastWriteTime
-                });
+            var results = repos.Skip(query.SkipTo(repos.Length)).Take(query.Limit).Select(i => GetGitRepoInfo(i));
 
             return Task.FromResult(new GitRepoCollection(query, repos.Length, results));
         }
 
-        public async Task<GitRepo> Get(Guid gitRepoId)
+        public Task<GitRepo> Get(String name)
         {
-            var 
-            var entity = await this.Entity(gitRepoId);
-            return mapper.MapGitRepo(entity, new GitRepo());
-        }
-
-        public async Task<GitRepo> Add(GitRepoInput gitRepo)
-        {
-            var entity = mapper.MapGitRepo(gitRepo, new GitRepoEntity());
-            this.dbContext.Add(entity);
-            await SaveChanges();
-            return mapper.MapGitRepo(entity, new GitRepo());
-        }
-
-        public async Task<GitRepo> Update(Guid gitRepoId, GitRepoInput gitRepo)
-        {
-            var entity = await this.Entity(gitRepoId);
-            if (entity != null)
+            string fullPath = GetFullPath(name);
+            if (!Directory.Exists(fullPath))
             {
-                mapper.MapGitRepo(gitRepo, entity);
-                await SaveChanges();
-                return mapper.MapGitRepo(entity, new GitRepo());
+                throw new InvalidOperationException($"A repository named '{fullPath}' could not be found.");
             }
-            throw new KeyNotFoundException($"Cannot find gitRepo {gitRepoId.ToString()}");
+
+            var dirInfo = new DirectoryInfo(fullPath);
+            return Task.FromResult(GetGitRepoInfo(dirInfo));
         }
 
-        public async Task Delete(Guid id)
+        public Task<GitRepo> Add(GitRepoInput gitRepo)
         {
-            var entity = await this.Entity(id);
-            if (entity != null)
+            string fullPath = GetFullPath(gitRepo.Name);
+            if (Directory.Exists(fullPath))
             {
-                Entities.Remove(entity);
-                await SaveChanges();
+                throw new InvalidOperationException($"A repository named '{fullPath}' already exists.");
             }
+
+            Directory.CreateDirectory(fullPath);
+
+            var dirInfo = new DirectoryInfo(fullPath);
+            return Task.FromResult(GetGitRepoInfo(dirInfo));
         }
 
-        public virtual async Task<bool> HasGitRepos()
+        public Task Delete(String name)
         {
-            return await Entities.CountAsync() > 0;
+            string fullPath = GetFullPath(name);
+            Directory.Delete(fullPath, true);
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> HasGitRepos()
+        {
+            return Task.FromResult(repoDir.GetDirectories().Length > 0);
         }
 
         public virtual async Task AddRange(IEnumerable<GitRepoInput> gitRepos)
         {
-            var entities = gitRepos.Select(i => mapper.MapGitRepo(i, new GitRepoEntity()));
-            this.dbContext.GitRepos.AddRange(entities);
-            await SaveChanges();
-        }
-
-        protected virtual async Task SaveChanges()
-        {
-            await this.dbContext.SaveChangesAsync();
-        }
-
-        private DbSet<GitRepoEntity> Entities
-        {
-            get
+            foreach (var repo in gitRepos)
             {
-                return dbContext.GitRepos;
+                await Add(repo);
             }
         }
 
-        private Task<GitRepoEntity> Entity(Guid gitRepoId)
+        private string GetFullPath(string name)
         {
-            return Entities.Where(i => i.GitRepoId == gitRepoId).FirstOrDefaultAsync();
+            return Path.Combine(repoDir.FullName, name);
+        }
+
+        private static GitRepo GetGitRepoInfo(DirectoryInfo dirInfo)
+        {
+            return new GitRepo()
+            {
+                Name = dirInfo.Name,
+                Created = dirInfo.CreationTime,
+                Modified = dirInfo.LastWriteTime
+            };
         }
     }
 }

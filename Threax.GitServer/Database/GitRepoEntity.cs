@@ -13,8 +13,6 @@ namespace Threax.GitServer.Database
     public partial class GitRepoEntity : ICreatedModified
     {
         [Key]
-        public Guid GitRepoId { get; set; }
-
         public String Name { get; set; }
 
         public String ClonePath { get; set; }

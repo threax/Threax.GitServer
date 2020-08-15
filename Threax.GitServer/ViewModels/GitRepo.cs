@@ -14,12 +14,9 @@ namespace Threax.GitServer.ViewModels
 {
     [HalModel]
     [HalSelfActionLink(typeof(GitReposController), nameof(GitReposController.Get))]
-    [HalActionLink(typeof(GitReposController), nameof(GitReposController.Update))]
     [HalActionLink(typeof(GitReposController), nameof(GitReposController.Delete))]
     public partial class GitRepo : ICreatedModified
     {
-        public Guid GitRepoId { get; set; }
-
         public String Name { get; set; }
 
         public String ClonePath { get; set; }

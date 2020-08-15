@@ -13,7 +13,6 @@ namespace Threax.GitServer.ViewModels
     [HalSelfActionLink(typeof(GitReposController), nameof(GitReposController.List))]
     [HalActionLink(typeof(GitReposController), nameof(GitReposController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(GitReposController), nameof(GitReposController.List), DocsOnly = true)] //This provides docs for searching the list
-    [HalActionLink(typeof(GitReposController), nameof(GitReposController.Update), DocsOnly = true)] //This provides access to docs for updating items if the ui has different modes
     [HalActionLink(typeof(GitReposController), nameof(GitReposController.Add))]
     [DeclareHalLink(typeof(GitReposController), nameof(GitReposController.List), PagedCollectionView<Object>.Rels.Next, ResponseOnly = true)]
     [DeclareHalLink(typeof(GitReposController), nameof(GitReposController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]

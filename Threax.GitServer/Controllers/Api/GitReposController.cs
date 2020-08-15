@@ -30,11 +30,11 @@ namespace Threax.GitServer.Controllers.Api
             return await repo.List(query);
         }
 
-        [HttpGet("{GitRepoId}")]
+        [HttpGet("{Name}")]
         [HalRel(CrudRels.Get)]
-        public async Task<GitRepo> Get(Guid gitRepoId)
+        public async Task<GitRepo> Get(String name)
         {
-            return await repo.Get(gitRepoId);
+            return await repo.Get(name);
         }
 
         [HttpPost]
@@ -45,19 +45,11 @@ namespace Threax.GitServer.Controllers.Api
             return await repo.Add(gitRepo);
         }
 
-        [HttpPut("{GitRepoId}")]
-        [HalRel(CrudRels.Update)]
-        [AutoValidate("Cannot update gitRepo")]
-        public async Task<GitRepo> Update(Guid gitRepoId, [FromBody]GitRepoInput gitRepo)
-        {
-            return await repo.Update(gitRepoId, gitRepo);
-        }
-
-        [HttpDelete("{GitRepoId}")]
+        [HttpDelete("{Name}")]
         [HalRel(CrudRels.Delete)]
-        public async Task Delete(Guid gitRepoId)
+        public async Task Delete(String name)
         {
-            await repo.Delete(gitRepoId);
+            await repo.Delete(name);
         }
     }
 }
