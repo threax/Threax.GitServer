@@ -1,11 +1,6 @@
 # Running
-1. Go to SshHost
-1. Use Threax.DockerTools to build appconfig.json
-1. On Windows change `StrictModes` under environment to `no`. This way it will ignore the messed up permissions on the authorized_keys file.
-1. Use Threax.DockerTools to run appconfig.json
-1. Run Threax.GitServer
-1. Add your public ssh key to the Authorized Keys gui.
-1. You should now be able to create/clone/push etc to your repos.
+1. Install Threax.DockerTools if needed. `dotnet tool install -g Threax.DockerTools`
+2. Run `Local.ps1` in the Deployment folder.
 
 # Permissions Issues
 If you get a login error `Permission denied (publickey,keyboard-interactive).` its probably file permisisons.

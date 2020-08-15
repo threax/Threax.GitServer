@@ -261,6 +261,5 @@ __pycache__/
 *.pyc
 /AppTemplate/AppTemplate.db
 
-/SshHost/data
-/SshHost/appdata
-/SshHost/repo
+/Deployment/data
+/Deployment/secrets
