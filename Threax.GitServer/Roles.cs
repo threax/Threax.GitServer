@@ -13,10 +13,9 @@ namespace Threax.GitServer
     /// </summary>
     public static class Roles
     {
-        /// <summary>
-        /// A default role to edit values, you will probably want to replace this role.
-        /// </summary>
         public const String EditGitRepos = nameof(EditGitRepos);
+
+        public const String DeleteGitRepos = nameof(DeleteGitRepos);
 
         public const String EditAuthorizedKeys = nameof(EditAuthorizedKeys);
 
@@ -28,6 +27,7 @@ namespace Threax.GitServer
         {
             yield return EditGitRepos;
             yield return EditAuthorizedKeys;
+            yield return DeleteGitRepos;
         }
     }
 
@@ -39,6 +39,8 @@ namespace Threax.GitServer
     public class RoleAssignments : ReflectedRoleAssignments
     {
         public bool EditGitRepos { get; set; }
+
+        public bool DeleteGitRepos { get; set; }
 
         public bool EditAuthorizedKeys { get; set; }
     }

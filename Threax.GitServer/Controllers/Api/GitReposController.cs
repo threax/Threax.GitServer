@@ -47,6 +47,7 @@ namespace Threax.GitServer.Controllers.Api
 
         [HttpDelete("{Name}")]
         [HalRel(CrudRels.Delete)]
+        [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer, Roles = Roles.DeleteGitRepos)]
         public async Task Delete(String name)
         {
             await repo.Delete(name);
