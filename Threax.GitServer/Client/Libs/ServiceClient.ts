@@ -1416,7 +1416,8 @@ export class UserSearchCollectionResult {
 
 
 export interface RoleAssignments {
-    editValues?: boolean;
+    editGitRepos?: boolean;
+    deleteGitRepos?: boolean;
     editAuthorizedKeys?: boolean;
     userId?: string;
     name?: string;
