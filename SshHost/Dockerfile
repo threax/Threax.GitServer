@@ -7,11 +7,11 @@ RUN apt-get update &&\
     apt-get autoremove &&\
     apt-get clean
 
-RUN useradd -u 30010 -ms /bin/bash threax
-USER threax
-
 COPY sshd_config /app/sshd_config
 COPY sshd_config_nostrict /app/sshd_config_nostrict
 COPY run.sh /app/run.sh
 
 CMD /app/run.sh
+
+RUN useradd -u 30010 -ms /bin/bash readwrite
+USER readwrite
