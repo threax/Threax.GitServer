@@ -38,7 +38,7 @@ namespace Threax.GitServer
     [HalActionLink(CrudRels.Delete, RolesControllerRels.DeleteUser, typeof(RolesController))]
     public class RoleAssignments : ReflectedRoleAssignments
     {
-        public bool EditValues { get; set; }
+        public bool EditGitRepos { get; set; }
 
         public bool EditAuthorizedKeys { get; set; }
     }

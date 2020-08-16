@@ -13,5 +13,6 @@ COPY run.sh /app/run.sh
 
 CMD /app/run.sh
 
-RUN useradd -u 30010 -ms /bin/bash readwrite
+ARG USER=30010
+RUN useradd -u $USER -ms /bin/bash readwrite
 USER readwrite
