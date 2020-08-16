@@ -35,7 +35,7 @@
     },
     "Update Client": {
       "commandName": "Project",
-      "commandLineArgs": "tools \"clientgen Client\\Libs\\ServiceClient.ts\"",
+      "commandLineArgs": "tools \"clientgen Client\\Libs\\ServiceClient.ts ../Threax.GitServer.Client/ServiceClient.cs\"",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
