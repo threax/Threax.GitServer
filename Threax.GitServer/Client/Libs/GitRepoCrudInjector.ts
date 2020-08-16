@@ -22,7 +22,7 @@ export class GitRepoCrudInjector extends hyperCrud.AbstractHypermediaPageInjecto
     }
 
     public getDeletePrompt(item: client.GitRepoResult): string {
-        return "Are you sure you want to delete the gitRepo?";
+        return `Are you sure you want to delete ${item.data.name}?`;
     }
 
     public getItemId(item: client.GitRepoResult): string | null {
