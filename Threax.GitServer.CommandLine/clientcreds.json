@@ -1,0 +1,6 @@
+{
+    "IdServerHost": "https://localhost:44390",
+    "ClientId": "Threax.GitServer.CommandLine",
+    "ClientSecret": "notyetdefined",
+    "Scope": "Threax.GitServer"
+}

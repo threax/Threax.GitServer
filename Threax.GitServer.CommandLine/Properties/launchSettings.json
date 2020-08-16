@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Threax.GitServer.CommandLine": {
+      "commandName": "Project",
+      "commandLineArgs": "addrepo https://localhost:44322/api clientcreds.json Automated"
+    }
+  }
+}

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Client.OpenIdConnect;
 using Threax.ConsoleApp;
@@ -28,13 +29,15 @@ namespace Threax.GitServer.CommandLine
                         o.AddConsole();
                     });
 
+                    services.AddHalcyonClient();
+
                     services.AddThreaxGitServerClient(o =>
                     {
                         o.ServiceUrl = args[1];
                     })
                     .SetupHttpClientFactoryWithClientCredentials(o =>
                     {
-                        o.ClientCredentials = JsonConvert.DeserializeObject<ClientCredentailsAccessTokenFactoryOptions>(credentialsFile);
+                        o.ClientCredentials = JsonConvert.DeserializeObject<ClientCredentailsAccessTokenFactoryOptions>(File.ReadAllText(credentialsFile));
                     });
 
                     services.AddSingleton<IArgsProvider>(s => new ArgsProvider(args));

@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Threax.GitServer.Client\Threax.GitServer.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="clientcreds.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

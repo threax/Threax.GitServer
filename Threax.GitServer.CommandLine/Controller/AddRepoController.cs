@@ -30,7 +30,7 @@ namespace Threax.GitServer.CommandLine.Controller
             }
 
             var args = argsProvider.Args;
-            int i = 3;
+            int i = 2;
             var repoName = args.Length > ++i ? args[i] : throw new InvalidOperationException($"Cannot find repo name in position {i}.");
 
             await entryPoint.AddGitRepo(new GitRepoInput()
