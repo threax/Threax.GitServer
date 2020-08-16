@@ -14,3 +14,14 @@ C:\Windows\System32\OpenSSH\ssh.exe
 It should now pick up the key and config from the user ssh folder.
 
 You may also have to ssh into the host once or otherwise get it into known_hosts for Tortoise to start working correctly.
+
+# Command Line App
+To use the command line app create a client credential in the id server. Then create a json file like the following:
+```
+{
+    "IdServerHost": "https://localhost:44390",
+    "ClientId": "Threax.GitServer.CommandLine",
+    "ClientSecret": "notyetdefined",
+    "Scope": "Threax.GitServer"
+}
+```
