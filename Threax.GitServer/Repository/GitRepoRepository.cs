@@ -31,7 +31,7 @@ namespace Threax.GitServer.Repository
 
         public Task<GitRepoCollection> List(GitRepoQuery query)
         {
-            var repos = repoFolderProvider.GetDirectoryInfo().EnumerateDirectories($"*{query.Name}*").OrderByDescending(i => i.LastAccessTime).ToList();
+            var repos = repoFolderProvider.GetDirectoryInfo().EnumerateDirectories($"*{query.Name}*").OrderByDescending(i => i.LastWriteTime).ToList();
             var results = repos.Skip(query.SkipTo(repos.Count)).Take(query.Limit).Select(i => GetGitRepoInfo(i));
 
             return Task.FromResult(new GitRepoCollection(query, repos.Count, results));
