@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.GitServer.Tests", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.GitServer.Client", "Threax.GitServer.Client\Threax.GitServer.Client.csproj", "{361D45E2-8E59-4926-B718-DC3EE35FF307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.GitServer.CommandLine", "Threax.GitServer.CommandLine\Threax.GitServer.CommandLine.csproj", "{2C04FAA4-11B1-4A9F-983C-9C0B344274A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.GitServer.CommandLine", "Threax.GitServer.CommandLine\Threax.GitServer.CommandLine.csproj", "{2C04FAA4-11B1-4A9F-983C-9C0B344274A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
