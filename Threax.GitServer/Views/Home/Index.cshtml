@@ -2,6 +2,33 @@
     ViewData["Title"] = "Repos";
 }
 
+<div data-hr-controller="search" class="mb-2">
+    <load visible="true">
+        <p>Loading Search...</p>
+    </load>
+    <main>
+        <form data-hr-on-submit="submit" data-hr-form="input">
+            <p class="bg-danger hiddenToggler col-sm-10" data-hr-toggle="mainError" data-hr-view="mainError" data-hr-style-on="display:block;">{{message}}</p>
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <div class="" data-hr-toggle="nameHide" data-hr-style-on="display:none;">
+                        <div class="form-group">
+                            <input id="hr-form-prop-2" class="form-control" name="name" type="text" data-hr-toggle="nameError" data-hr-class-on="is-invalid" data-hr-form-level=""> 
+                            <div class="invalid-feedback d-none" data-hr-view="nameErrorMessage" data-hr-toggle="nameError" data-hr-class-on="d-block" data-hr-class-off="d-none" data-hr-state="off"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pl-2">
+                    <button type="submit" class="btn btn-primary" data-hr-form-end>Search</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <error>
+        An error occured loading the search form. Please try again later.
+    </error>
+</div>
+
 <div data-hr-controller="mainTable">
     <load visible="true">
         <p>Working...</p>
@@ -10,14 +37,17 @@
         <div data-hr-view="listing">
             <template>
                 <div class="card mb-2">
-                    <div class="card-header d-sm-flex justify-content-between">
-                        <div class="p-2">{{name}}</div>
-                        <div class="p-2">{{clonePath}} <button data-hr-on-click="copyClonePath" class="btn btn-primary ml-1 ml-sm-3">Copy</button></div>
+                    <div class="card-header d-sm-flex justify-content-between align-items-center">
+                        <h5 class="flex-grow-1 mb-0">{{name}}</h5>
+                        <div class="pr-2">{{clonePath}}</div>
+                        <div>
+                            <button data-hr-on-click="copyClonePath" class="btn btn-primary">Copy</button>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="d-sm-flex justify-content-between">
-                            <div class="p-2">Last Modified: {{modified}}</div>
-                            <div class="p-2">
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <div>Last Modified: {{modified}}</div>
+                            <div>
                                 <button data-hr-on-click="edit" class="btn btn-default" data-hr-toggle="edit" data-hr-style-off="display:none;">&#9999;</button>
                                 <button data-hr-on-click="view" class="btn btn-default" data-hr-toggle="view" data-hr-style-off="display:none;">&#128065;</button>
                                 <button data-hr-on-click="del" class="btn btn-default" data-hr-toggle="del" data-hr-style-off="display:none;">&#128683;</button>

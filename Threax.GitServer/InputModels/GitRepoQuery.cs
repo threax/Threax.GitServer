@@ -18,6 +18,7 @@ namespace Threax.GitServer.InputModels
         /// <summary>
         /// Lookup a gitRepo by id.
         /// </summary>
+        [UiSearch]
         public String Name { get; set; }
     }
 }
