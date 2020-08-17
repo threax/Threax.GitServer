@@ -31,7 +31,12 @@ namespace Threax.GitServer.Repository
 
         public Task<GitRepoCollection> List(GitRepoQuery query)
         {
-            var repos = repoFolderProvider.GetDirectoryInfo().EnumerateDirectories($"*{query.Name}*").OrderByDescending(i => i.LastWriteTime).ToList();
+            var repoQuery = repoFolderProvider.GetDirectoryInfo().EnumerateDirectories();
+            if (query.Name != null)
+            {
+                repoQuery = repoQuery.Where(i => i.Name.Contains(query.Name, StringComparison.InvariantCultureIgnoreCase));
+            }
+            var repos = repoQuery.OrderByDescending(i => i.LastWriteTime).ToList();
             var results = repos.Skip(query.SkipTo(repos.Count)).Take(query.Limit).Select(i => GetGitRepoInfo(i));
 
             return Task.FromResult(new GitRepoCollection(query, repos.Count, results));
@@ -61,7 +66,7 @@ namespace Threax.GitServer.Repository
             var startInfo = new ProcessStartInfo("git", "init --bare");
             startInfo.WorkingDirectory = fullPath;
             var result = processRunner.RunProcessWithOutput(startInfo);
-            if(result != 0)
+            if (result != 0)
             {
                 throw new InvalidOperationException($"Error initializing git repository '{gitRepo.Name}'.");
             }
