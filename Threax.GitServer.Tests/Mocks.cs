@@ -90,7 +90,7 @@ namespace Threax.GitServer.Tests
         {
             return new ClaimsIdentity(roles.Select(i => new Claim(ClaimTypes.Role, i)).Concat(new Claim[]
             {
-                new Claim(Threax.AspNetCore.AuthCore.ClaimTypes.ObjectGuid, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
             }));
         }
     }
