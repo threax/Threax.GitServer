@@ -9,7 +9,7 @@ const AccessTokenClaim = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/
 
 class AppMenuController {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, client.EntryPointInjector, tm.TokenManager];
+        return [controller.BindingCollection, client.EntryPointInjector, tm.TokenManager, safepost.PostMessageValidator];
     }
 
     private userInfoView: controller.IView<any>;
