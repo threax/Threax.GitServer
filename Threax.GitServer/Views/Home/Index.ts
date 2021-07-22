@@ -1,10 +1,10 @@
-import * as standardCrudPage from 'hr.widgets.StandardCrudPage';
-import * as startup from 'clientlibs.startup';
-import * as deepLink from 'hr.deeplink';
-import { GitRepoCrudInjector } from 'clientlibs.GitRepoCrudInjector';
-import { CrudTableRowControllerExtensions, CrudTableRowController } from 'hr.widgets.CrudTableRow';
-import * as controller from 'hr.controller';
-import * as client from 'clientlibs.ServiceClient';
+import * as standardCrudPage from 'htmlrapier.widgets/src/StandardCrudPage';
+import * as startup from 'Client/Libs/startup';
+import * as deepLink from 'htmlrapier/src/deeplink';
+import { GitRepoCrudInjector } from 'Client/Libs/GitRepoCrudInjector';
+import { CrudTableRowControllerExtensions, CrudTableRowController } from 'htmlrapier.widgets/src/CrudTableRow';
+import * as controller from 'htmlrapier/src/controller';
+import * as client from 'Client/Libs/ServiceClient';
 
 class CrudRow extends CrudTableRowControllerExtensions {
     private data: client.GitRepoResult;
