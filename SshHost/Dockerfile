@@ -12,9 +12,4 @@ COPY sshd_config_nostrict /app/sshd_config_nostrict
 COPY run.sh /app/run.sh
 
 CMD /app/run.sh
-
-ARG USER=30010
-RUN useradd -u $USER -ms /bin/bash readwrite
-RUN chown readwrite -R /app
-RUN chmod 700 /app/run.sh
-USER readwrite
+RUN chmod 777 /app/run.sh
