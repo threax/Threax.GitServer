@@ -6,4 +6,4 @@ configFile="/app/sshd_config_nostrict"
 fi
 
 echo "Using config '$configFile'"
-/usr/sbin/sshd -D -p 2222 -f $configFile
+/usr/sbin/sshd -d -D -p 2222 -f $configFile
