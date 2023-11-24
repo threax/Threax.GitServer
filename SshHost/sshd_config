@@ -6,3 +6,5 @@ X11Forwarding no
 
 # Go ahead and force this to yes
 StrictModes yes
+
+LogLevel DEBUG3
