@@ -28,7 +28,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo --help
 
 WORKDIR /scutiger
-RUN git clone https://github.com/threax/scutiger .
+# RUN git clone https://github.com/threax/scutiger .
+COPY scutiger .
 RUN make
 
 
