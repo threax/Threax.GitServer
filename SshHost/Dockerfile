@@ -15,6 +15,7 @@ RUN apt-get update &&\
     apt-get install curl -y &&\
     apt-get install build-essential -y &&\
     apt-get install make -y &&\
+    apt-get install git -y &&\
     apt-get autoremove &&\
     apt-get clean
     
@@ -27,7 +28,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo --help
 
 WORKDIR /scutiger
-COPY scutiger .
+RUN git clone https://github.com/threax/scutiger .
 RUN make
 
 
