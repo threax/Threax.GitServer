@@ -1,0 +1,214 @@
+blob
+mark :1
+data 0
+
+reset refs/heads/fixup
+commit refs/heads/fixup
+mark :2
+author Test User <test@example.com> 1551552695 +0000
+committer Test User <test@example.com> 1551552695 +0000
+data 15
+Initial import
+M 100644 :1 foo
+
+blob
+mark :3
+data 4
+foo
+
+commit refs/heads/dev
+mark :4
+author Test User <test@example.com> 1551552749 +0000
+committer Test User <test@example.com> 1551552749 +0000
+data 70
+Update foo
+
+To ensure maximum fooness, update foo to contain content.
+from :2
+M 100644 :3 foo
+
+commit refs/heads/branch
+mark :5
+author Test User <test@example.com> 1551552839 +0000
+committer Test User <test@example.com> 1551552839 +0000
+data 72
+Add bar
+
+Having multiple different files is nice, so add a file, "bar".
+from :2
+M 100644 :1 bar
+
+blob
+mark :6
+data 4
+bar
+
+commit refs/heads/branch
+mark :7
+author Test User <test@example.com> 1551552922 +0000
+committer Test User <test@example.com> 1551552922 +0000
+data 70
+Update bar
+
+To ensure maximum barness, update bar to contain content.
+from :5
+M 100644 :6 bar
+
+commit refs/heads/dev
+mark :8
+author Test User <test@example.com> 1551552935 +0000
+committer Test User <test@example.com> 1551552935 +0000
+data 22
+Merge branch 'branch'
+from :4
+merge :7
+M 100644 :6 bar
+
+commit refs/heads/fixup
+mark :9
+author Test User <test@example.com> 1552250548 +0000
+committer Test User <test@example.com> 1552250548 +0000
+data 71
+Add baz
+
+Introduce baz, a new file, because new files are interesting.
+from :2
+M 100644 :1 baz
+
+blob
+mark :10
+data 4
+baz
+
+commit refs/heads/fixup
+mark :11
+author Test User <test@example.com> 1552250662 +0000
+committer Test User <test@example.com> 1552250736 +0000
+data 160
+fixup! Add baz
+
+This is a commit that modifies baz. When squashed, it will look like we
+inserted this text directly into baz initially, when it was a new file.
+from :9
+M 100644 :10 baz
+
+blob
+mark :12
+data 8
+baz
+baz
+
+commit refs/heads/fixup
+mark :13
+author Test User <test@example.com> 1552250851 +0000
+committer Test User <test@example.com> 1552250851 +0000
+data 145
+squash! Add baz
+
+This is a squash, which will have the effect of modifying baz in the
+initial commit that introduced it, when it was a new file.
+from :11
+M 100644 :12 baz
+
+commit refs/heads/dev
+mark :14
+author Test User <test@example.com> 1552250865 +0000
+committer Test User <test@example.com> 1552250865 +0000
+data 21
+Merge branch 'fixup'
+from :8
+merge :13
+M 100644 :12 baz
+
+blob
+mark :15
+data 21
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+commit refs/heads/merge3
+mark :16
+author Test User <test@example.com> 1589149728 +0000
+committer Test User <test@example.com> 1589149728 +0000
+data 8
+Add seq
+from :14
+M 100644 :15 seq
+
+blob
+mark :17
+data 26
+1
+change
+3
+4
+5
+6
+7
+8
+9
+10
+
+commit refs/heads/merge1
+mark :18
+author Test User <test@example.com> 1589149794 +0000
+committer Test User <test@example.com> 1589149794 +0000
+data 18
+Change for merge1
+from :16
+M 100644 :17 seq
+
+blob
+mark :19
+data 27
+1
+change2
+3
+4
+5
+6
+7
+8
+9
+10
+
+commit refs/heads/merge2
+mark :20
+author Test User <test@example.com> 1589149831 +0000
+committer Test User <test@example.com> 1589149831 +0000
+data 18
+Change for merge2
+from :16
+M 100644 :19 seq
+
+blob
+mark :21
+data 27
+1
+2
+3
+4
+5
+6
+7
+8
+change3
+10
+
+commit refs/heads/merge3
+mark :22
+author Test User <test@example.com> 1589149867 +0000
+committer Test User <test@example.com> 1589149867 +0000
+data 18
+Change for merge3
+from :16
+M 100644 :21 seq
+
