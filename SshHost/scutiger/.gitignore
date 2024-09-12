@@ -1,0 +1,10 @@
+# Build products.
+target/
+*.html
+*.md
+*.stamp
+# Tool output.
+*.bk
+*.1
+test/Dockerfile.*
+!test/Dockerfile.*.erb

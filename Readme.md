@@ -25,3 +25,6 @@ To use the command line app create a client credential in the id server. Then cr
     "Scope": "Threax.GitServer"
 }
 ```
+
+# git-lfs-transfer
+The ssh host images include https://github.com/bk2204/scutiger to build git-lfs-transfer to support git-lfs over ssh. The code is just copied into this repo since it is small instead of using a submodule. To update it replace the entire folder under SshHost/scutiger. There are no modifications.
