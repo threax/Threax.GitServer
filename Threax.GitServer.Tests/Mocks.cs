@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Threax.GitServer.Database;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using Threax.AspNetCore.Tests;
-using Microsoft.Extensions.DependencyInjection;
+using Threax.GitServer.Database;
 
 namespace Threax.GitServer.Tests
 {
@@ -61,20 +62,21 @@ namespace Threax.GitServer.Tests
         /// <returns>The passed in mockup test.</returns>
         public static Mockup SetupWebHost(this Mockup mockup)
         {
-            mockup.Add<IWebHost>(m =>
+            mockup.Add<IHost>(m =>
             {
-                var hostBuilder = new WebHostBuilder()
-                                    .UseEnvironment("development")
-                                    .UseKestrel()
-                                    .UseStartup<Startup>()
-                                    .ConfigureAppConfiguration(configuration =>
-                                    {
-                                        configuration.Sources.Clear();
-                                        configuration.AddJsonFile("appsettings.json");
-                                        configuration.AddJsonFile("appsettings.Development.json");
-                                    });
+                var webHostBuilder = new HostBuilder()
+                .ConfigureWebHostDefaults(webHostBuilder =>
+                {
+                    webHostBuilder.UseStartup<Startup>();
+                })
+                .ConfigureAppConfiguration(configuration =>
+                {
+                    configuration.Sources.Clear();
+                    configuration.AddJsonFile("appsettings.json");
+                    configuration.AddJsonFile("appsettings.Development.json");
+                });
 
-                return hostBuilder.Build();
+                return webHostBuilder.Build();
             });
 
             return mockup;

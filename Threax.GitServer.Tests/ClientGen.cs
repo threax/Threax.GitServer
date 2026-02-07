@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Threax.GitServer.Tests
         [Fact]
         public void Run()
         {
-            var host = mockup.Get<IWebHost>();
+            var host = mockup.Get<IHost>();
             var clientWriter = host.Services.GetRequiredService<IClientGenerator>();
             var clientTest = new ClientGenTester(clientWriter);
             clientTest.Verify();
