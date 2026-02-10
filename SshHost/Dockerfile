@@ -1,4 +1,4 @@
-FROM debian AS base
+FROM ubuntu as base
 
 # Install SSH
 RUN apt-get update &&\
@@ -9,7 +9,7 @@ RUN apt-get update &&\
 
 
 
-FROM base AS build
+FROM base as build
 
 RUN apt-get update &&\
     apt-get install curl -y &&\
@@ -34,7 +34,7 @@ RUN make
 
 
 
-FROM base AS final
+FROM base as final
 
 COPY --from=build /scutiger/target/release/git-lfs-transfer /bin/git-lfs-transfer
 
