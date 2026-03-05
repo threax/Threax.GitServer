@@ -132,7 +132,7 @@ namespace Threax.GitServer
             });
 
             // Add framework services.
-            services.AddMvc(o =>
+            var mvcBuilder = services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
@@ -142,7 +142,6 @@ namespace Threax.GitServer
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
-            .AddRazorRuntimeCompilation()
             .AddConventionalIdServerMvc()
             .AddThreaxUserLookup(o =>
             {
@@ -152,6 +151,11 @@ namespace Threax.GitServer
             {
                 o.CacheControlHeader = appConfig.CacheControlHeaderString;
             });
+
+            if (appConfig.UseRazorRuntimeCompilation)
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+            }
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
