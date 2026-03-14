@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
-using Threax.GitServer.InputModels;
-using Threax.GitServer.Database;
-using Threax.GitServer.ViewModels;
 using System.Linq;
+using Threax.GitServer.Database;
+using Threax.GitServer.InputModels;
+using Threax.GitServer.ViewModels;
 
 namespace Threax.GitServer.Mappers
 {
@@ -15,41 +10,39 @@ namespace Threax.GitServer.Mappers
     {
         public AuthorizedKeyEntity MapAuthorizedKey(AuthorizedKeyInput src, AuthorizedKeyEntity dest)
         {
-            return mapper.Map(src, dest);
+            //dest.AuthorizedKeyId Ignored
+            dest.Name = src.Name;
+            dest.PublicKey = src.PublicKey;
+            dest.Enabled = src.Enabled;
+            dest.Created = GetCreated(dest.Created);
+            dest.Modified = DateTime.UtcNow;
+
+            return dest;
         }
 
         public AuthorizedKey MapAuthorizedKey(AuthorizedKeyEntity src, AuthorizedKey dest)
         {
-            return mapper.Map(src, dest);
+            dest.AuthorizedKeyId = src.AuthorizedKeyId;
+            dest.Name = src.Name;
+            dest.PublicKey = src.PublicKey;
+            dest.Enabled = src.Enabled;
+            dest.Created = src.Created;
+            dest.Modified = src.Modified;
+
+            return dest;
         }
 
         public IQueryable<AuthorizedKey> ProjectAuthorizedKey(IQueryable<AuthorizedKeyEntity> query)
         {
-            return mapper.ProjectTo<AuthorizedKey>(query);
-        }
-    }
-
-    public partial class AuthorizedKeyProfile : Profile
-    {
-        public AuthorizedKeyProfile()
-        {
-            //Map the input model to the entity
-            MapInputToEntity(CreateMap<AuthorizedKeyInput, AuthorizedKeyEntity>());
-
-            //Map the entity to the view model.
-            MapEntityToView(CreateMap<AuthorizedKeyEntity, AuthorizedKey>());
-        }
-
-        void MapInputToEntity(IMappingExpression<AuthorizedKeyInput, AuthorizedKeyEntity> mapExpr)
-        {
-            mapExpr.ForMember(d => d.AuthorizedKeyId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
-        }
-
-        void MapEntityToView(IMappingExpression<AuthorizedKeyEntity, AuthorizedKey> mapExpr)
-        {
-            
+            return query.Select(i => new AuthorizedKey()
+            {
+                AuthorizedKeyId = i.AuthorizedKeyId,
+                Name = i.Name,
+                PublicKey = i.PublicKey,
+                Enabled = i.Enabled,
+                Created = i.Created,
+                Modified = i.Modified
+            });
         }
     }
 }

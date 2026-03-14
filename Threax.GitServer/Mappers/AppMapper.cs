@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Threax.GitServer.Mappers
 {
@@ -13,11 +9,14 @@ namespace Threax.GitServer.Mappers
     /// </summary>
     public partial class AppMapper
     {
-        private IMapper mapper;
-
-        public AppMapper(IMapper mapper)
+        public AppMapper()
         {
-            this.mapper = mapper;
+
+        }
+
+        private DateTime GetCreated(DateTime created)
+        {
+            return created == DateTime.MinValue ? DateTime.UtcNow : created;
         }
     }
 }

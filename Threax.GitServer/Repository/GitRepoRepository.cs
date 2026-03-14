@@ -1,18 +1,14 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Threax.GitServer.Database;
-using Threax.GitServer.InputModels;
-using Threax.GitServer.ViewModels;
-using Threax.GitServer.Mappers;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using System.IO;
+using Threax.GitServer.InputModels;
 using Threax.GitServer.Services;
-using System.Diagnostics;
+using Threax.GitServer.ViewModels;
 
 namespace Threax.GitServer.Repository
 {

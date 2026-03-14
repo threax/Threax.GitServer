@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
+using System;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.GitServer.Controllers.Api;
-using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace Threax.GitServer.ViewModels 
 {
@@ -16,7 +10,7 @@ namespace Threax.GitServer.ViewModels
     [HalSelfActionLink(typeof(AuthorizedKeysController), nameof(AuthorizedKeysController.Get))]
     [HalActionLink(typeof(AuthorizedKeysController), nameof(AuthorizedKeysController.Update))]
     [HalActionLink(typeof(AuthorizedKeysController), nameof(AuthorizedKeysController.Delete))]
-    public partial class AuthorizedKey : ICreatedModified
+    public partial class AuthorizedKey
     {
         public Guid AuthorizedKeyId { get; set; }
 

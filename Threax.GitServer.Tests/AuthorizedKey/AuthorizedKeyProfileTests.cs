@@ -1,9 +1,8 @@
-using AutoMapper;
-using Threax.GitServer.Database;
-using Threax.GitServer.ViewModels;
-using Threax.GitServer.Mappers;
 using System;
 using Threax.AspNetCore.Tests;
+using Threax.GitServer.Database;
+using Threax.GitServer.Mappers;
+using Threax.GitServer.ViewModels;
 using Xunit;
 
 namespace Threax.GitServer.Tests

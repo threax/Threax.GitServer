@@ -1,17 +1,14 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
 using Threax.AspNetCore.Tests;
 using Threax.GitServer.Database;
 
@@ -26,8 +23,7 @@ namespace Threax.GitServer.Tests
         /// <returns>The passed in mockup test.</returns>
         public static Mockup SetupGlobal(this Mockup mockup)
         {
-            mockup.MockServiceCollection.AddTimeTracking();
-            mockup.MockServiceCollection.AddAppMapper(includeAutomapperConfig: true);
+            mockup.MockServiceCollection.AddAppMapper();
 
             mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
